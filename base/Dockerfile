@@ -16,23 +16,25 @@ RUN apt-get update \
 ENV JAVA_HOME /usr/lib/jvm/default-java
 
 # HADOOP
-ENV HADOOP_VERSION 2.7.7
+ARG HADOOP_VERSION=2.7.7
+ENV HADOOP_VERSION $HADOOP_VERSION
 ENV HADOOP_HOME /usr/hadoop-${HADOOP_VERSION}
 ENV HADOOP_PACKAGE hadoop-${HADOOP_VERSION}
 
-RUN wget https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/${HADOOP_PACKAGE}.tar.gz \
+RUN wget --quiet https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/${HADOOP_PACKAGE}.tar.gz \
      && tar -xzf ${HADOOP_PACKAGE}.tar.gz \
      && mv ${HADOOP_PACKAGE} ${HADOOP_HOME} \
      && rm ${HADOOP_PACKAGE}.tar.gz \
      && chown -R root:root $HADOOP_HOME
 
 # SPARK
-ENV SPARK_VERSION 2.4.4
+ARG SPARK_VERSION=2.4.4
+ENV SPARK_VERSION $SPARK_VERSION
 ENV SPARK_PACKAGE spark-${SPARK_VERSION}-bin-without-hadoop
 ENV SPARK_HOME /usr/spark-${SPARK_VERSION}
 ENV PATH $PATH:${SPARK_HOME}/bin
 
-RUN wget https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_PACKAGE}.tgz \
+RUN wget --quiet https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_PACKAGE}.tgz \
      && tar -xzf ${SPARK_PACKAGE}.tgz \
      && mv ${SPARK_PACKAGE} ${SPARK_HOME} \
      && rm ${SPARK_PACKAGE}.tgz \
