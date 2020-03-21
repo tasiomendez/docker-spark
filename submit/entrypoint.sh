@@ -10,6 +10,7 @@ fi
 
 echo '>>' connecting to Master @ spark://$SPARK_MASTER_HOST:$SPARK_MASTER_PORT
 echo '>>' files submited @ hdfs://$HADOOP_HOST:$HADOOP_PORT
+echo '>>' deploy mode. $SPARK_DEPLOY_MODE
 echo '>>' jar: $JAVA_JAR_FILENAME
 echo '>>' class: $JAVA_JAR_MAIN_CLASS
 
@@ -20,6 +21,7 @@ $HADOOP_HOME/bin/hdfs dfs -fs hdfs://$HADOOP_HOST:$HADOOP_PORT -put -f $JAVA_JAR
 $SPARK_HOME/bin/spark-submit \
   --master spark://$SPARK_MASTER_HOST:$SPARK_MASTER_PORT \
   --class $JAVA_JAR_MAIN_CLASS \
+  --deploy-mode $SPARK_DEPLOY_MODE \
   --conf spark.driver.host=$SPARK_DRIVER_HOST \
   $SPARK_SUBMIT_ARGS \
   hdfs://$HADOOP_HOST:$HADOOP_PORT/spark/application.jar \
