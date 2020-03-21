@@ -1,4 +1,6 @@
-FROM middleware/spark-base:2.4.4-hadoop2.7
+ARG HADOOP_VERSION=2.7.7
+ARG SPARK_VERSION=2.4.4
+FROM tasiomendez/spark-base:${SPARK_VERSION}-hadoop${HADOOP_VERSION}
 
 COPY spark-defaults.conf .
 RUN mv spark-defaults.conf $SPARK_HOME/conf/
