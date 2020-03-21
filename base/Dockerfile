@@ -21,6 +21,7 @@ ENV HADOOP_VERSION $HADOOP_VERSION
 ENV HADOOP_HOME /usr/hadoop-${HADOOP_VERSION}
 ENV HADOOP_PACKAGE hadoop-${HADOOP_VERSION}
 
+RUN echo Downloading ${HADOOP_PACKAGE}.tar.gz
 RUN wget --quiet https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/${HADOOP_PACKAGE}.tar.gz \
      && tar -xzf ${HADOOP_PACKAGE}.tar.gz \
      && mv ${HADOOP_PACKAGE} ${HADOOP_HOME} \
@@ -34,6 +35,7 @@ ENV SPARK_PACKAGE spark-${SPARK_VERSION}-bin-without-hadoop
 ENV SPARK_HOME /usr/spark-${SPARK_VERSION}
 ENV PATH $PATH:${SPARK_HOME}/bin
 
+RUN echo Downloading ${SPARK_PACKAGE}.tgz
 RUN wget --quiet https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_PACKAGE}.tgz \
      && tar -xzf ${SPARK_PACKAGE}.tgz \
      && mv ${SPARK_PACKAGE} ${SPARK_HOME} \
