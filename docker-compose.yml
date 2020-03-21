@@ -1,0 +1,36 @@
+version: '3'
+services:
+  spark-master:
+    image: tasiomendez/spark-master:2.4.4-hadoop2.7.7
+    hostname: spark-master
+    environment:
+      - SPARK_PUBLIC_DNS=192.168.99.103
+      - SPARK_MASTER_WEBUI_PORT=8080
+    ports:
+      - 4040:4040
+      - 6066:6066
+      - 7077:7077
+      - 8080:8080
+
+  spark-worker:
+    image: tasiomendez/spark-worker:2.4.4-hadoop2.7.7
+    hostname: spark-worker
+    environment:
+      - SPARK_PUBLIC_DNS=192.168.99.103
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_WORKER_WEBUI_PORT=8081
+    ports:
+      # - 8081-8090:8081
+      - 8081:8081
+    depends_on:
+      - spark-master
+
+  hadoop:
+    image: tasiomendez/spark-hadoop:2.4.4-hadoop2.7.7
+    hostname: hadoop
+    environment:
+      - HADOOP_HOST=hadoop
+      - HADOOP_PORT=9000
+    ports:
+      - 50070:50070
+      - 9000:9000
