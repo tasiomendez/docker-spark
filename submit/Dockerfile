@@ -6,6 +6,11 @@ RUN mv spark-defaults.conf $SPARK_HOME/conf/
 ENV SPARK_MASTER_HOST localhost
 ENV SPARK_MASTER_PORT 7077
 
+ENV HADOOP_HOST hadoop
+ENV HADOOP_PORT 9000
+
+ENV JAVA_JAR_MAIN_CLASS my.main.Application
+
 # MAVEN
 RUN apt-get update \
      && apt-get install -y maven \
