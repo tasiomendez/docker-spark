@@ -35,7 +35,7 @@ sh build.sh <folder of image to build>  # sh build.sh master/
 ```
 
 All the images use versions 2.12 for Scala, 2.4.4 for Spark and 2.7.7 for Hadoop. However, it is possible to change the version used
-when building the container passing .
+when building the container.
 
 ```shell
 sh build.sh <folder of image to build> <Spark version> <Hadoop version>
