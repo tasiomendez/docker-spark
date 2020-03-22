@@ -12,6 +12,13 @@ The folder `hadoop` provides a single node cluster setup of Hadoop in order to p
 The folders `master` and `worker` provides the corresponding images of Spark.
 Finally, the folder `submit` provides a template for submitting jobs to the Spark's Standalone Cluster.
 
+All the images use versions 2.12 for Scala, 2.4.4 for Spark and 2.7.7 for Hadoop. However, it is possible to change the version used
+when building the container.
+
+```shell
+docker build --build-arg SPARK_VERSION=2.4.4 --build-arg HADOOP_VERSION=2.7.7 -t tasiomendez/spark-base:2.4.4-hadoop2.7.7 base
+```
+
 ## Getting started
 
 For setting up the Spark's Standalone cluster it just needed to run the docker compose file.
@@ -32,4 +39,31 @@ In case, the user wants to build the images from scratch, the script `build.sh` 
 
 ```shell
 sh build.sh <folder of image to build>  # sh build.sh master/
+```
+
+## Submit template
+
+The template for submitting JARs to a Spark's Standalone cluster is configurable through different environment
+variables which are detailed in the following table.
+
+| Variable | Default value | Purpose |
+| -------- | ------------- | ------- |
+| `SPARK_MASTER_HOST` | localhost | Master node of Spark's Standalone cluster hostname |
+| `SPARK_MASTER_PORT` | 7077 | Master node of Spark's Standalone cluster port |
+| `SPARK_DEPLOY_MODE` | client | Deploy mode of Spark: (client || cluster) |
+| `SPARK_DRIVER_HOST` | `<local IP>` | Local IP of the container |
+| `SPARK_SUBMIT_ARGS` | "" | Arguments that are passed to the spark-submit script |
+| `HADOOP_HOST` | hadoop | Hostname of hadoop container |
+| `HADOOP_PORT` | 9000 | Port of HDFS  |
+| `JAVA_JAR_MAIN_CLASS` | my.main.Application | Java class to run |
+
+When using the template, it is necessary to run the `entrypoint.sh` which makes all the necessary configuration
+on the fly as well as submit the jar file to the cluster. The `CMD` for the container should be in *exec form* with
+the first argument the path where the jar is created and later the jar arguments.
+
+```Dockerfile
+FROM tasiomendez/spark-submit:2.4.4-hadoop2.7.7
+
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["target/application.jar", "arg1 arg2 arg3"]
 ```
