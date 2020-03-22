@@ -18,4 +18,5 @@ RUN mv ./*.xml $HADOOP_HOME/etc/hadoop/
 EXPOSE 9000 8020 50070 8032 8088
 
 COPY entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]

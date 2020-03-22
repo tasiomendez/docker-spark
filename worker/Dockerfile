@@ -14,4 +14,5 @@ ENV SPARK_WORKER_WEBUI_PORT 8081
 EXPOSE 8081 8881
 
 COPY entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]

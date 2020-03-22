@@ -36,6 +36,7 @@ ONBUILD RUN cd /usr/src/app \
 ONBUILD WORKDIR /usr/src/app
 
 COPY entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 CMD ["target/application.jar"]

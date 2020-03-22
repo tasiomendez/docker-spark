@@ -9,4 +9,5 @@ ENV SPARK_MASTER_WEBUI_PORT 8080
 EXPOSE 6066 7077 8080
 
 COPY entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
