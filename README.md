@@ -12,13 +12,6 @@ The folder `hadoop` provides a single node cluster setup of Hadoop in order to p
 The folders `master` and `worker` provides the corresponding images of Spark.
 Finally, the folder `submit` provides a template for submitting jobs to the Spark's Standalone Cluster.
 
-All the images use versions 2.12 for Scala, 2.4.4 for Spark and 2.7.7 for Hadoop. However, it is possible to change the version used
-when building the container.
-
-```shell
-docker build --build-arg SPARK_VERSION=2.4.4 --build-arg HADOOP_VERSION=2.7.7 -t tasiomendez/spark-base:2.4.4-hadoop2.7.7 base
-```
-
 ## Getting started
 
 For setting up the Spark's Standalone cluster it just needed to run the docker compose file.
@@ -39,6 +32,13 @@ In case, the user wants to build the images from scratch, the script `build.sh` 
 
 ```shell
 sh build.sh <folder of image to build>  # sh build.sh master/
+```
+
+All the images use versions 2.12 for Scala, 2.4.4 for Spark and 2.7.7 for Hadoop. However, it is possible to change the version used
+when building the container passing .
+
+```shell
+sh build.sh <folder of image to build> <Spark version> <Hadoop version>
 ```
 
 ## Submit template
