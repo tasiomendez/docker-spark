@@ -1,5 +1,9 @@
 # Running Spark on Docker
 
+![Docker Pulls](https://img.shields.io/docker/pulls/tasiomendez/spark-submit)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/tasiomendez/spark-submit)
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/tasiomendez/spark-submit?label=latest%20version)
+
 This repo provides the necessary images for running a Spark Cluster using Spark's Standalone mode.
 Spark provides different modes to run on clusters: local, client and cluster mode.
 
